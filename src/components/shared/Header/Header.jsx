@@ -60,7 +60,9 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1 gap-5">{navLinks}</ul>
         </div>
         <div className="navbar-end gap-2.5">
+          {/* Theme Toggle Button */}
           <ThemeToggleButton className="mr-1 md:mr-1.5 lg:mr-2" />
+
           <Link className="px-3 py-1.5 rounded-md font-medium transition-all duration-300 ease-in-out bg-secondary text-secondary-content">
             Login
           </Link>

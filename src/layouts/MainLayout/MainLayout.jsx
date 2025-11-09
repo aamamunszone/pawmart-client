@@ -12,7 +12,7 @@ const MainLayout = () => {
       </header>
 
       {/* Main Section */}
-      <main className="flex-1">
+      <main className="grow">
         <Outlet />
       </main>
 

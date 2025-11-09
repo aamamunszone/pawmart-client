@@ -7,6 +7,7 @@ import PrivateRoute from './PrivateRoute';
 import AddListing from '../pages/AddListing/AddListing';
 import MyListings from '../pages/MyListings/MyListings';
 import MyOrders from '../pages/MyOrders/MyOrders';
+import NotFound from '../pages/NotFound/NotFound';
 
 export const router = createBrowserRouter([
   // MainLayout Routes
@@ -43,5 +44,11 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+  },
+
+  // NotFound Element
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ]);
