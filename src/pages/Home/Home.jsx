@@ -1,9 +1,15 @@
 import React from 'react';
+import HeroSection from '../../components/home/HeroSection/HeroSection';
 
 const Home = () => {
   return (
     <div>
-      <h1>Home</h1>
+      <title>PawMart | Pet Adoption & Supplies</title>
+
+      {/* Hero Section */}
+      <section>
+        <HeroSection />
+      </section>
     </div>
   );
 };

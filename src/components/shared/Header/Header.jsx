@@ -21,14 +21,14 @@ const Header = () => {
   );
 
   return (
-    <div className="shadow-md">
-      <Container className="navbar">
+    <Container className="backdrop-blur-md rounded-b-4xl md:rounded-b-full px-1 md:px-5 lg:px-10 w-full">
+      <div className="navbar py-2.5">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="lg:hidden mr-2">
+            <div tabIndex={0} role="button" className="lg:hidden mr-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-9 w-9"
+                className="h-8 w-8"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -44,7 +44,7 @@ const Header = () => {
             </div>
             <ul
               tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-40 mt-3.5 w-52 p-2 gap-1 shadow-md"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-md z-40 mt-5 w-52 p-2 gap-1 shadow-md"
             >
               {navLinks}
             </ul>
@@ -53,7 +53,9 @@ const Header = () => {
             to="/"
             className="text-2xl font-bold tracking-wider leading-relaxed"
           >
-            PawMart
+            <h1 className="text-2xl font-bold leading-relaxed tracking-wide bg-linear-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent whitespace-nowrap">
+              PawMart
+            </h1>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -70,8 +72,8 @@ const Header = () => {
             Get Started
           </Link>
         </div>
-      </Container>
-    </div>
+      </div>
+    </Container>
   );
 };
 
