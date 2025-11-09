@@ -2,21 +2,21 @@ import React from 'react';
 import Container from '../../common/Container/Container';
 import { Link } from 'react-router';
 import NavItem from './NavItem/NavItem';
+import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
 
 const Header = () => {
-  const publicNavLinks = (
+  const navLinks = (
     <>
       <NavItem to="/home">Home</NavItem>
       <NavItem to="/shop">Pets & Supplies</NavItem>
       <NavItem to="/services">Services</NavItem>
-    </>
-  );
-
-  const privateNavLinks = (
-    <>
-      <NavItem to="/listings/create">Add Listing</NavItem>
-      <NavItem to="/listings/user">My Listings</NavItem>
-      <NavItem to="/orders/user">My Orders</NavItem>
+      {/* {user && (
+        <>
+          <NavItem to="/listings/create">Add Listing</NavItem>
+          <NavItem to="/listings/user">My Listings</NavItem>
+          <NavItem to="/orders/user">My Orders</NavItem>
+        </>
+      )} */}
     </>
   );
 
@@ -46,7 +46,7 @@ const Header = () => {
               tabIndex="-1"
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-40 mt-3.5 w-52 p-2 gap-1 shadow-md"
             >
-              {publicNavLinks} {privateNavLinks}
+              {navLinks}
             </ul>
           </div>
           <Link
@@ -57,15 +57,14 @@ const Header = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 gap-5">
-            {publicNavLinks} {privateNavLinks}
-          </ul>
+          <ul className="menu menu-horizontal px-1 gap-5">{navLinks}</ul>
         </div>
         <div className="navbar-end gap-2.5">
-          <Link className="px-3 py-1.5 rounded-md font-medium transition-all duration-300 ease-in-out bg-blue-500 text-white">
+          <ThemeToggleButton className="mr-1 md:mr-1.5 lg:mr-2" />
+          <Link className="px-3 py-1.5 rounded-md font-medium transition-all duration-300 ease-in-out bg-secondary text-secondary-content">
             Login
           </Link>
-          <Link className="hidden md:inline-block px-3 py-1.5 rounded-md font-medium transition-all duration-300 ease-in-out bg-green-500 text-white">
+          <Link className="hidden md:inline-block px-3 py-1.5 rounded-md font-medium transition-all duration-300 ease-in-out bg-accent text-accent-content">
             Get Started
           </Link>
         </div>

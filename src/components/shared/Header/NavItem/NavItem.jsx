@@ -9,8 +9,8 @@ const NavItem = ({ to, children, className = '' }) => {
         className={({ isActive }) =>
           `px-3 py-1.5 rounded-md font-medium transition-all duration-300 ease-in-out ${
             isActive
-              ? 'bg-[tomato] text-white'
-              : 'bg-gray-100 hover:bg-gray-200'
+              ? 'bg-primary text-primary-content'
+              : 'bg-base-200 hover:bg-base-300'
           } ${className}`
         }
       >

@@ -5,9 +5,77 @@
 @import 'tailwindcss';
 
 /* DaisyUI */
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: pawmart-light --default, pawmart-dark --prefersdark;
+}
 
+/* Custom PawMart Light Theme */
+[data-theme='pawmart-light'] {
+  --color-base-100: #ffffff;
+  --color-base-200: #f8f9fa;
+  --color-base-300: #e9ecef;
+  --color-base-content: #212529;
+
+  --color-primary: #ff6b6b;
+  --color-primary-content: #ffffff;
+
+  --color-secondary: #4ecdc4;
+  --color-secondary-content: #ffffff;
+
+  --color-accent: #ffe66d;
+  --color-accent-content: #2d3748;
+
+  --color-neutral: #495057;
+  --color-neutral-content: #ffffff;
+
+  --color-info: #3b82f6;
+  --color-info-content: #ffffff;
+
+  --color-success: #10b981;
+  --color-success-content: #ffffff;
+
+  --color-warning: #f59e0b;
+  --color-warning-content: #ffffff;
+
+  --color-error: #ef4444;
+  --color-error-content: #ffffff;
+}
+
+/* Custom PawMart Dark Theme */
+[data-theme='pawmart-dark'] {
+  --color-base-100: #1f2937;
+  --color-base-200: #111827;
+  --color-base-300: #374151;
+  --color-base-content: #f9fafb;
+
+  --color-primary: #ff6b6b;
+  --color-primary-content: #ffffff;
+
+  --color-secondary: #4ecdc4;
+  --color-secondary-content: #ffffff;
+
+  --color-accent: #ffe66d;
+  --color-accent-content: #1f2937;
+
+  --color-neutral: #d1d5db;
+  --color-neutral-content: #1f2937;
+
+  --color-info: #60a5fa;
+  --color-info-content: #ffffff;
+
+  --color-success: #34d399;
+  --color-success-content: #ffffff;
+
+  --color-warning: #fbbf24;
+  --color-warning-content: #1f2937;
+
+  --color-error: #f87171;
+  --color-error-content: #ffffff;
+}
+
+/* Global Styles */
 body {
+  @apply bg-base-100 text-base-content;
   font-family: 'Inter', sans-serif;
 }
 
