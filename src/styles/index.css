@@ -10,3 +10,8 @@
 body {
   font-family: 'Inter', sans-serif;
 }
+
+/* For Debugging */
+/* * {
+  border: 1px solid red;
+} */
