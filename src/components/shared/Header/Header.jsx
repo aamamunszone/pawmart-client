@@ -3,20 +3,39 @@ import Container from '../../common/Container/Container';
 import { Link } from 'react-router';
 import NavItem from './NavItem/NavItem';
 import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
+import useAuth from '../../../hooks/useAuth';
+import Loader from '../../common/Loader/Loader';
+import toast from 'react-hot-toast';
 
 const Header = () => {
+  const { user, loading, signOutUser } = useAuth();
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        toast.success('Successfully Logout');
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   const navLinks = (
     <>
       <NavItem to="/home">Home</NavItem>
       <NavItem to="/shop">Pets & Supplies</NavItem>
       <NavItem to="/services">Services</NavItem>
-      {/* {user && (
+      {user && (
         <>
           <NavItem to="/listings/create">Add Listing</NavItem>
           <NavItem to="/listings/user">My Listings</NavItem>
           <NavItem to="/orders/user">My Orders</NavItem>
         </>
-      )} */}
+      )}
     </>
   );
 
@@ -65,12 +84,44 @@ const Header = () => {
           {/* Theme Toggle Button */}
           <ThemeToggleButton className="mr-1 md:mr-1.5 lg:mr-2" />
 
-          <Link className="px-3 py-1.5 rounded-md font-medium transition-all duration-300 ease-in-out bg-secondary text-secondary-content">
-            Login
-          </Link>
-          <Link className="hidden md:inline-block px-3 py-1.5 rounded-md font-medium transition-all duration-300 ease-in-out bg-accent text-accent-content">
-            Get Started
-          </Link>
+          {user ? (
+            <div className="flex justify-between items-center gap-2">
+              <div className="relative w-10 h-10">
+                <div className="absolute w-full h-full rounded-full border-3 border-green-200"></div>
+                <div className="absolute w-full h-full rounded-full border-t-2 border-green-600 animate-spin"></div>
+                <div className="absolute w-full h-full rounded-full border border-[lime] p-1 overflow-hidden">
+                  <img
+                    src={user?.photoURL}
+                    alt={user?.displayName}
+                    className="rounded-full"
+                    title={user?.displayName}
+                  />
+                </div>
+              </div>
+
+              <button
+                onClick={handleSignOut}
+                className="px-3 py-1.5 rounded-md font-medium bg-linear-to-br from-[#ee0979] to-[#ff6a00] text-white transition-all duration-200 ease-in-out"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="space-x-2.5">
+              <Link
+                to="/auth/login"
+                className="px-3 py-1.5 rounded-md font-medium transition-all duration-300 ease-in-out bg-secondary text-secondary-content"
+              >
+                Login
+              </Link>
+              <Link
+                to="/auth/register"
+                className="hidden md:inline-block px-3 py-1.5 rounded-md font-medium transition-all duration-300 ease-in-out bg-accent text-accent-content"
+              >
+                Get Started
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </Container>

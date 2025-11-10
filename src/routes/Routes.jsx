@@ -8,6 +8,8 @@ import AddListing from '../pages/AddListing/AddListing';
 import MyListings from '../pages/MyListings/MyListings';
 import MyOrders from '../pages/MyOrders/MyOrders';
 import NotFound from '../pages/NotFound/NotFound';
+import Register from '../pages/Auth/Register/Register';
+import Login from '../pages/Auth/Login/Login';
 
 export const router = createBrowserRouter([
   // MainLayout Routes
@@ -43,6 +45,8 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      { path: 'auth/register', Component: Register },
+      { path: 'auth/login', Component: Login },
     ],
   },
 
