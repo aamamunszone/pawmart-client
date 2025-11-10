@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import 'swiper/css/effect-fade';
+import Container from '../../common/Container/Container';
 
 const HeroSection = () => {
   const slides = [
@@ -83,7 +84,7 @@ const HeroSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="w-full h-[calc(100vh-80px)] relative overflow-hidden">
+    <Container className="h-[50vh] md:h-[55vh] lg:h-[60vh] my-10 relative overflow-hidden rounded-2xl">
       <Swiper
         modules={[Pagination, Autoplay, EffectFade]}
         pagination={{
@@ -229,7 +230,7 @@ const HeroSection = () => {
           {activeIndex + 1} / {slides.length}
         </div>
       </motion.div>
-    </div>
+    </Container>
   );
 };
 

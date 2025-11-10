@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
+import Container from '../../common/Container/Container';
 
 const CategorySection = () => {
   const navigate = useNavigate();
@@ -71,7 +72,7 @@ const CategorySection = () => {
 
   return (
     <section className="py-20 bg-base-200">
-      <div className="container mx-auto px-4">
+      <Container>
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
@@ -188,7 +189,7 @@ const CategorySection = () => {
             </motion.div>
           ))}
         </motion.div>
-      </div>
+      </Container>
     </section>
   );
 };
