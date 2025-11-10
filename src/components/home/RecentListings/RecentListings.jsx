@@ -13,20 +13,22 @@ const RecentListings = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchRecentListings = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:3000/listings/recent'
+        );
+        setListings(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        toast.error('Failed to load listings!');
+        setLoading(false);
+      }
+    };
+
     fetchRecentListings();
   }, []);
-
-  const fetchRecentListings = async () => {
-    try {
-      const response = await axios.get('http://localhost:3000/listings/recent');
-      setListings(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      toast.error('Failed to load listings!');
-      setLoading(false);
-    }
-  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -111,7 +113,7 @@ const RecentListings = () => {
           transition={{ delay: 0.6, duration: 0.8 }}
         >
           <motion.button
-            onClick={() => navigate('/pets-supplies')}
+            onClick={() => navigate('/shop')}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
             className="px-8 py-4 bg-linear-to-r from-blue-600 to-cyan-500 text-white font-bold text-lg rounded-full shadow-2xl hover:shadow-xl transition-all duration-300 flex items-center gap-2 mx-auto"
