@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 import useAuth from '../../../hooks/useAuth';
+import { Helmet } from 'react-helmet';
 
 const Register = () => {
   const { createUser, googleSignIn } = useAuth();
@@ -80,7 +81,9 @@ const Register = () => {
 
   return (
     <>
-      <title>PawMart | Register</title>
+      <Helmet>
+        <title>PawMart | Register</title>
+      </Helmet>
 
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
         <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg">

@@ -30,6 +30,10 @@ const RecentListings = () => {
     fetchRecentListings();
   }, []);
 
+  if (loading) {
+    return <Loader />;
+  }
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -52,12 +56,8 @@ const RecentListings = () => {
     },
   };
 
-  if (loading) {
-    return <Loader />;
-  }
-
   return (
-    <section className="py-20 bg-base-100">
+    <div className="py-20 bg-base-100">
       <Container>
         {/* Section Header */}
         <motion.div
@@ -116,7 +116,8 @@ const RecentListings = () => {
             onClick={() => navigate('/shop')}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
-            className="px-8 py-4 bg-linear-to-r from-blue-600 to-cyan-500 text-white font-bold text-lg rounded-full shadow-2xl hover:shadow-xl transition-all duration-300 flex items-center gap-2 mx-auto"
+            className="px-8 py-4 bg-linear-to-r from-blue-600 to-cyan-500 text-white font-bold text-lg rounded-full shadow-2xl hover:shadow-xl transition-all duration-300 flex items-center gap-2 mx-auto cursor-pointer"
+            transition={{ delay: 0.2, duration: 0.3 }}
           >
             <span>View All Listings</span>
             <svg
@@ -135,7 +136,7 @@ const RecentListings = () => {
           </motion.button>
         </motion.div>
       </Container>
-    </section>
+    </div>
   );
 };
 

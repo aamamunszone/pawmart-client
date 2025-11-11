@@ -20,6 +20,7 @@ const Header = () => {
         toast.success('Successfully Logout');
       })
       .catch((error) => {
+        toast.error('Logout Failed');
         console.log(error.message);
       });
   };
@@ -32,15 +33,15 @@ const Header = () => {
       {user && (
         <>
           <NavItem to="/listings/create">Add Listing</NavItem>
-          <NavItem to="/listings/user">My Listings</NavItem>
-          <NavItem to="/orders/user">My Orders</NavItem>
+          <NavItem to="/listings/my-listings">My Listings</NavItem>
+          <NavItem to="/orders/my-orders">My Orders</NavItem>
         </>
       )}
     </>
   );
 
   return (
-    <Container className="backdrop-blur-md rounded-b-4xl md:rounded-b-full px-1 md:px-5 lg:px-10 w-full">
+    <Container className="bg-base-100/70 backdrop-blur-sm rounded-b-4xl md:rounded-b-full px-2 md:px-8 lg:px-16 w-full">
       <div className="navbar py-2.5">
         <div className="navbar-start">
           <div className="dropdown">
@@ -93,8 +94,8 @@ const Header = () => {
                   <img
                     src={user?.photoURL}
                     alt={user?.displayName}
-                    className="rounded-full"
                     title={user?.displayName}
+                    className="rounded-full"
                   />
                 </div>
               </div>

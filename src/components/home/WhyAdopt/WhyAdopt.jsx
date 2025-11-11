@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import Container from '../../common/Container/Container';
+import { useNavigate } from 'react-router';
 
 const WhyAdopt = () => {
+  const navigate = useNavigate();
+
   const reasons = [
     {
       id: 1,
@@ -60,7 +63,7 @@ const WhyAdopt = () => {
   };
 
   return (
-    <section className="py-20 bg-base-200">
+    <div className="py-20 bg-base-200">
       <Container>
         {/* Section Header */}
         <motion.div
@@ -78,7 +81,7 @@ const WhyAdopt = () => {
             transition={{ delay: 0.2, duration: 0.8 }}
           >
             <span className="bg-linear-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
-              Why Adopt from PawMart?
+              Why Adopt from PawMart ?
             </span>
           </motion.h2>
           <motion.p
@@ -173,7 +176,7 @@ const WhyAdopt = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.8, duration: 0.6 }}
             >
-              Ready to Make a Difference?
+              Ready to Make a Difference ?
             </motion.h3>
             <motion.p
               className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto"
@@ -183,16 +186,17 @@ const WhyAdopt = () => {
               transition={{ delay: 1, duration: 0.6 }}
             >
               Browse our available pets and give them the loving home they
-              deserve. Every adoption changes two lives — theirs and yours.
+              deserve. Every adoption changes two lives - theirs and yours.
             </motion.p>
             <motion.button
+              onClick={() => navigate('/shop')}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 bg-white text-blue-600 font-bold text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-2 mx-auto"
+              className="px-8 py-4 bg-white text-blue-600 font-bold text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-2 mx-auto cursor-pointer"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 1.2, duration: 0.6 }}
+              transition={{ delay: 0.2, duration: 0.3 }}
             >
               <span>View Available Pets</span>
               <svg
@@ -212,7 +216,7 @@ const WhyAdopt = () => {
           </div>
         </motion.div>
       </Container>
-    </section>
+    </div>
   );
 };
 

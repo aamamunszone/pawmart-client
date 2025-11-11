@@ -72,7 +72,7 @@ const PetHeroes = () => {
   };
 
   return (
-    <section className="py-20 bg-base-100">
+    <div className="py-20 bg-base-100">
       <Container>
         {/* Section Header */}
         <motion.div
@@ -193,7 +193,7 @@ const PetHeroes = () => {
         >
           <div className="bg-linear-to-r from-blue-600/10 to-cyan-600/10 rounded-3xl p-8 md:p-12">
             <h3 className="text-2xl md:text-3xl font-bold text-base-content mb-4">
-              Want to Become a Pet Hero?
+              Want to Become a Pet Hero ?
             </h3>
             <p className="text-base-content/70 mb-6 max-w-2xl mx-auto">
               Join our community of amazing pet lovers and make a real
@@ -203,7 +203,8 @@ const PetHeroes = () => {
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 bg-linear-to-r from-blue-600 to-cyan-500 text-white font-bold text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-2 mx-auto"
+              className="px-8 py-4 bg-linear-to-r from-blue-600 to-cyan-500 text-white font-bold text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-2 mx-auto cursor-pointer"
+              transition={{ delay: 0.2, duration: 0.3 }}
             >
               <span>Start Your Journey</span>
               <svg
@@ -223,7 +224,7 @@ const PetHeroes = () => {
           </div>
         </motion.div>
       </Container>
-    </section>
+    </div>
   );
 };
 

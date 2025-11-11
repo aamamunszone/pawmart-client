@@ -7,6 +7,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import 'swiper/css/effect-fade';
 import Container from '../../common/Container/Container';
+import { Link } from 'react-router';
 
 const HeroSection = () => {
   const slides = [
@@ -84,7 +85,7 @@ const HeroSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <Container className="h-[50vh] md:h-[55vh] lg:h-[60vh] my-10 relative overflow-hidden rounded-2xl">
+    <Container className="h-[50vh] md:h-[55vh] lg:h-[60vh] my-5 md:my-8 lg:my-10 relative overflow-hidden rounded-2xl">
       <Swiper
         modules={[Pagination, Autoplay, EffectFade]}
         pagination={{
@@ -163,7 +164,10 @@ const HeroSection = () => {
                         whileTap={{ scale: 0.98 }}
                         className="relative px-6 py-3 bg-linear-to-r from-blue-600 to-cyan-500 rounded-full font-bold text-lg shadow-2xl overflow-hidden transition-all duration-300 cursor-pointer"
                       >
-                        <span className="group relative z-10 flex items-center gap-2">
+                        <Link
+                          to="/shop"
+                          className="group relative z-10 flex items-center gap-2"
+                        >
                           Explore Pets
                           <svg
                             className="w-5 h-5 group-hover:translate-x-1 transition-transform"
@@ -178,7 +182,7 @@ const HeroSection = () => {
                               d="M13 7l5 5m0 0l-5 5m5-5H6"
                             />
                           </svg>
-                        </span>
+                        </Link>
                         <div className="absolute inset-0 bg-linear-to-r from-blue-700 to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </motion.button>
 
@@ -187,7 +191,7 @@ const HeroSection = () => {
                         whileTap={{ scale: 0.98 }}
                         className="px-6 py-3 bg-white/10 backdrop-blur-md border-2 border-white/30 rounded-full font-bold text-lg shadow-xl hover:bg-white/20 transition-all duration-300 cursor-pointer"
                       >
-                        Learn More
+                        <Link to="/services">Learn More</Link>
                       </motion.button>
                     </motion.div>
                   </motion.div>

@@ -1,14 +1,11 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router';
 
 const ListingCard = ({ listing }) => {
-  const handleDetailsClick = () => {
-    console.log('See Details button clicked!');
-  };
-
   return (
     <motion.div
-      className="group relative overflow-hidden rounded-2xl bg-base-100 shadow-xl cursor-pointer"
-      whileHover={{ y: -10 }}
+      className="group relative overflow-hidden rounded-2xl bg-base-100 shadow-xl"
+      whileHover={{ y: -5 }}
       transition={{ duration: 0.3, ease: [0.6, 0.05, 0.01, 0.9] }}
     >
       {/* Image Container */}
@@ -75,29 +72,30 @@ const ListingCard = ({ listing }) => {
         </div>
 
         {/* Button */}
-        <motion.button
-          onClick={handleDetailsClick}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="w-full py-3 bg-linear-to-r from-blue-600 to-cyan-500 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
-        >
-          <span>See Details</span>
-          <motion.svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            whileHover={{ x: 5 }}
-            transition={{ duration: 0.3 }}
+        <Link to={`/listing-details/${listing._id}`}>
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full py-3 bg-linear-to-r from-blue-600 to-cyan-500 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M13 7l5 5m0 0l-5 5m5-5H6"
-            />
-          </motion.svg>
-        </motion.button>
+            <span>See Details</span>
+            <motion.svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              whileHover={{ x: 5 }}
+              transition={{ duration: 0.3 }}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </motion.svg>
+          </motion.button>
+        </Link>
       </div>
 
       {/* Shine Effect */}

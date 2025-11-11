@@ -4,11 +4,14 @@ import CategorySection from '../../components/home/CategorySection/CategorySecti
 import RecentListings from '../../components/home/RecentListings/RecentListings';
 import WhyAdopt from '../../components/home/WhyAdopt/WhyAdopt';
 import PetHeroes from '../../components/home/PetHeroes/PetHeroes';
+import { Helmet } from 'react-helmet';
 
 const Home = () => {
   return (
-    <div>
-      <title>PawMart | Pet Adoption & Supplies</title>
+    <>
+      <Helmet>
+        <title>PawMart | Pet Adoption & Supplies</title>
+      </Helmet>
 
       {/* Hero Section */}
       <section>
@@ -34,7 +37,7 @@ const Home = () => {
       <section>
         <PetHeroes />
       </section>
-    </div>
+    </>
   );
 };
 

@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import Container from '../../components/common/Container/Container';
 import useAuth from '../../hooks/useAuth';
+import { Helmet } from 'react-helmet';
 
 const AddListing = () => {
   const { user } = useAuth();
@@ -71,172 +72,178 @@ const AddListing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-base-100 py-12">
-      <Container className="max-w-3xl">
-        <motion.h1
-          className="text-4xl md:text-5xl font-bold text-primary mb-8 text-center"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          🧺 Add New Listing
-        </motion.h1>
+    <>
+      <Helmet>
+        <title>PawMart | Add Listing</title>
+      </Helmet>
 
-        <motion.form
-          onSubmit={handleSubmit}
-          className="bg-base-200 rounded-2xl shadow-xl p-8 space-y-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {/* Name */}
-          <div>
-            <label className="label">
-              <span className="label-text font-semibold">
-                Product / Pet Name
-              </span>
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Enter product or pet name"
-              className="input input-bordered w-full"
-              required
-            />
-          </div>
+      <div className="min-h-screen bg-base-100 py-12">
+        <Container className="max-w-3xl">
+          <motion.h1
+            className="text-4xl md:text-5xl font-bold text-primary mb-8 text-center"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            🧺 Add New Listing
+          </motion.h1>
 
-          {/* Category */}
-          <div>
-            <label className="label">
-              <span className="label-text font-semibold">Category</span>
-            </label>
-            <select
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              className="select select-bordered w-full"
-            >
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-          </div>
+          <motion.form
+            onSubmit={handleSubmit}
+            className="bg-base-200 rounded-2xl shadow-xl p-8 space-y-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            {/* Name */}
+            <div>
+              <label className="label">
+                <span className="label-text font-semibold">
+                  Product / Pet Name
+                </span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Enter product or pet name"
+                className="input input-bordered w-full"
+                required
+              />
+            </div>
 
-          {/* Price */}
-          <div>
-            <label className="label">
-              <span className="label-text font-semibold">Price (BDT)</span>
-            </label>
-            <input
-              type="number"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-              min={0}
-              className={`input input-bordered w-full ${
-                formData.category === 'Pets'
-                  ? 'bg-gray-100 cursor-not-allowed'
-                  : ''
-              }`}
-              disabled={formData.category === 'Pets'}
-              required={formData.category !== 'Pets'}
-            />
-          </div>
+            {/* Category */}
+            <div>
+              <label className="label">
+                <span className="label-text font-semibold">Category</span>
+              </label>
+              <select
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                className="select select-bordered w-full"
+              >
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          {/* Location */}
-          <div>
-            <label className="label">
-              <span className="label-text font-semibold">Location</span>
-            </label>
-            <input
-              type="text"
-              name="location"
-              value={formData.location}
-              onChange={handleChange}
-              placeholder="Enter location"
-              className="input input-bordered w-full"
-              required
-            />
-          </div>
+            {/* Price */}
+            <div>
+              <label className="label">
+                <span className="label-text font-semibold">Price (BDT)</span>
+              </label>
+              <input
+                type="number"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                min={0}
+                className={`input input-bordered w-full ${
+                  formData.category === 'Pets'
+                    ? 'bg-gray-100 cursor-not-allowed'
+                    : ''
+                }`}
+                disabled={formData.category === 'Pets'}
+                required={formData.category !== 'Pets'}
+              />
+            </div>
 
-          {/* Description */}
-          <div>
-            <label className="label">
-              <span className="label-text font-semibold">Description</span>
-            </label>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              placeholder="Enter description"
-              className="textarea textarea-bordered w-full"
-              rows={4}
-              required
-            ></textarea>
-          </div>
+            {/* Location */}
+            <div>
+              <label className="label">
+                <span className="label-text font-semibold">Location</span>
+              </label>
+              <input
+                type="text"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                placeholder="Enter location"
+                className="input input-bordered w-full"
+                required
+              />
+            </div>
 
-          {/* Image URL */}
-          <div>
-            <label className="label">
-              <span className="label-text font-semibold">Image URL</span>
-            </label>
-            <input
-              type="url"
-              name="image"
-              value={formData.image}
-              onChange={handleChange}
-              placeholder="Enter image URL"
-              className="input input-bordered w-full"
-              required
-            />
-          </div>
+            {/* Description */}
+            <div>
+              <label className="label">
+                <span className="label-text font-semibold">Description</span>
+              </label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                placeholder="Enter description"
+                className="textarea textarea-bordered w-full"
+                rows={4}
+                required
+              ></textarea>
+            </div>
 
-          {/* Pick Up Date */}
-          <div>
-            <label className="label">
-              <span className="label-text font-semibold">Pick Up Date</span>
-            </label>
-            <input
-              type="date"
-              name="date"
-              value={formData.date}
-              onChange={handleChange}
-              className="input input-bordered w-full"
-              required
-            />
-          </div>
+            {/* Image URL */}
+            <div>
+              <label className="label">
+                <span className="label-text font-semibold">Image URL</span>
+              </label>
+              <input
+                type="url"
+                name="image"
+                value={formData.image}
+                onChange={handleChange}
+                placeholder="Enter image URL"
+                className="input input-bordered w-full"
+                required
+              />
+            </div>
 
-          {/* Email (readonly) */}
-          <div>
-            <label className="label">
-              <span className="label-text font-semibold">Email</span>
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              readOnly
-              className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
-            />
-          </div>
+            {/* Pick Up Date */}
+            <div>
+              <label className="label">
+                <span className="label-text font-semibold">Pick Up Date</span>
+              </label>
+              <input
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+                className="input input-bordered w-full"
+                required
+              />
+            </div>
 
-          {/* Submit Button */}
-          <div className="text-center">
-            <button
-              type="submit"
-              className={`btn btn-primary w-full ${loading ? 'loading' : ''}`}
-              disabled={loading}
-            >
-              {loading ? 'Saving...' : 'Add Listing'}
-            </button>
-          </div>
-        </motion.form>
-      </Container>
-    </div>
+            {/* Email (readonly) */}
+            <div>
+              <label className="label">
+                <span className="label-text font-semibold">Email</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                readOnly
+                className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
+              />
+            </div>
+
+            {/* Submit Button */}
+            <div className="text-center">
+              <button
+                type="submit"
+                className={`btn btn-primary w-full ${loading ? 'loading' : ''}`}
+                disabled={loading}
+              >
+                {loading ? 'Saving...' : 'Add Listing'}
+              </button>
+            </div>
+          </motion.form>
+        </Container>
+      </div>
+    </>
   );
 };
 

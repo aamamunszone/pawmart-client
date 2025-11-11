@@ -6,6 +6,7 @@ import Container from '../../components/common/Container/Container';
 import Loader from '../../components/common/Loader/Loader';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 
 const MyListings = () => {
   const { user } = useAuth();
@@ -114,7 +115,9 @@ const MyListings = () => {
 
   return (
     <>
-      <title>PawMart | My Listings</title>
+      <Helmet>
+        <title>PawMart | {user?.displayName}'s Listings</title>
+      </Helmet>
 
       <div className="min-h-screen bg-base-100 py-12">
         <Container>
