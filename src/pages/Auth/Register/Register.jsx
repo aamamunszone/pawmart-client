@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 import useAuth from '../../../hooks/useAuth';
+import { updateProfile } from 'firebase/auth';
 
 const Register = () => {
   const { createUser, googleSignIn } = useAuth();
@@ -60,7 +61,16 @@ const Register = () => {
 
     try {
       // Create user
-      await createUser(formData.email, formData.password);
+      const userCredential = await createUser(
+        formData.email,
+        formData.password
+      );
+
+      await updateProfile(userCredential.user, {
+        displayName: formData.name,
+        photoURL: formData.photoURL,
+      });
+
       toast.success('Registration successful!');
       navigate('/');
     } catch (error) {
