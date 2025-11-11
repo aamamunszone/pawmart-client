@@ -5,7 +5,6 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import Container from '../../components/common/Container/Container';
 import useAuth from '../../hooks/useAuth';
-import { Helmet } from 'react-helmet';
 
 const AddListing = () => {
   const { user } = useAuth();
@@ -73,9 +72,7 @@ const AddListing = () => {
 
   return (
     <>
-      <Helmet>
-        <title>PawMart | Add Listing</title>
-      </Helmet>
+      <title>{'PawMart | Add Listing'}</title>
 
       <div className="min-h-screen bg-base-100 py-12">
         <Container className="max-w-3xl">

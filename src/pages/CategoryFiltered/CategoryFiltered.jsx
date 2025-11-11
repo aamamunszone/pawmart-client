@@ -5,7 +5,6 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import Loader from '../../components/common/Loader/Loader';
 import ListingCard from '../../components/listing/ListingCard/ListingCard';
-import { Helmet } from 'react-helmet';
 import Container from '../../components/common/Container/Container';
 
 const CategoryFiltered = () => {
@@ -118,9 +117,7 @@ const CategoryFiltered = () => {
 
   return (
     <>
-      <Helmet>
-        <title>PawMart | {categoryName}</title>
-      </Helmet>
+      <title>{`PawMart | ${categoryName}`}</title>
 
       <div className="min-h-screen bg-base-100">
         {/* Hero Section */}

@@ -1,13 +1,10 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { Link } from 'react-router';
 
 const NotFound = () => {
   return (
     <>
-      <Helmet>
-        <title>404 - Page Not Found</title>
-      </Helmet>
+      <title>404 - Page Not Found</title>
 
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">

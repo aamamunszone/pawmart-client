@@ -6,7 +6,6 @@ import Loader from '../../components/common/Loader/Loader';
 import useAuth from '../../hooks/useAuth';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { Helmet } from 'react-helmet';
 
 const MyOrders = () => {
   const { user } = useAuth();
@@ -159,9 +158,7 @@ const MyOrders = () => {
 
   return (
     <>
-      <Helmet>
-        <title>PawMart | {user?.displayName}'s Orders</title>
-      </Helmet>
+      <title>{`PawMart | ${user?.displayName || 'User'}'s Orders`}</title>
 
       <div className="min-h-screen bg-base-100">
         {/* Hero Section */}

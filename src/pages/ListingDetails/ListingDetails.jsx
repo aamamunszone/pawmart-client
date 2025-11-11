@@ -7,7 +7,6 @@ import useAuth from '../../hooks/useAuth';
 import Loader from '../../components/common/Loader/Loader';
 import OrderModal from '../../components/listing/OrderModal/OrderModal';
 import Container from '../../components/common/Container/Container';
-import { Helmet } from 'react-helmet';
 
 const ListingDetails = () => {
   const { id } = useParams();
@@ -52,9 +51,7 @@ const ListingDetails = () => {
   if (!listing) {
     return (
       <>
-        <Helmet>
-          <title>PawMart | Not Found</title>
-        </Helmet>
+        <title>{'PawMart | Not Found'}</title>
 
         <div className="min-h-screen flex items-center justify-center bg-base-100">
           <div className="text-center">
@@ -76,9 +73,7 @@ const ListingDetails = () => {
 
   return (
     <>
-      <Helmet>
-        <title>PawMart | {listing.name}</title>
-      </Helmet>
+      <title>{`PawMart | ${listing.name || 'Details'}`}</title>
 
       <div className="min-h-screen bg-base-100">
         {/* Hero Section */}
