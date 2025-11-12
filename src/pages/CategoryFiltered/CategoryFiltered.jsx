@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import Loader from '../../components/common/Loader/Loader';
 import ListingCard from '../../components/listing/ListingCard/ListingCard';
 import Container from '../../components/common/Container/Container';
+import useAxios from '../../hooks/useAxios';
 
 const CategoryFiltered = () => {
+  const axiosPublic = useAxios();
   const { categoryName } = useParams();
   const navigate = useNavigate();
   const [listings, setListings] = useState([]);
@@ -20,8 +21,8 @@ const CategoryFiltered = () => {
     const fetchCategoryListings = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get(
-          `http://localhost:3000/listings/category/${categoryName}`
+        const { data } = await axiosPublic.get(
+          `/listings/category/${categoryName}`
         );
         setListings(data);
         setFilteredListings(data);
@@ -34,7 +35,7 @@ const CategoryFiltered = () => {
     };
 
     fetchCategoryListings();
-  }, [categoryName]);
+  }, [categoryName, axiosPublic]);
 
   // Filter by search
   useEffect(() => {

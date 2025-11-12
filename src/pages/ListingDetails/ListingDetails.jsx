@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { motion, AnimatePresence } from 'framer-motion';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import useAuth from '../../hooks/useAuth';
 import Loader from '../../components/common/Loader/Loader';
 import OrderModal from '../../components/listing/OrderModal/OrderModal';
 import Container from '../../components/common/Container/Container';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const ListingDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const axiosPrivate = useAxiosSecure();
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,9 +21,7 @@ const ListingDetails = () => {
     const fetchListingDetails = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get(
-          `http://localhost:3000/listings/${id}`
-        );
+        const { data } = await axiosPrivate.get(`/listings/${id}`);
         setListing(data);
       } catch (error) {
         console.error(error);
@@ -34,7 +33,7 @@ const ListingDetails = () => {
     };
 
     fetchListingDetails();
-  }, [id, navigate]);
+  }, [id, navigate, axiosPrivate]);
 
   const handleOrderClick = () => {
     setIsModalOpen(true);

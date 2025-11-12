@@ -1,12 +1,13 @@
 import { useEffect, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import ListingCard from '../../components/listing/ListingCard/ListingCard';
 import Loader from '../../components/common/Loader/Loader';
 import Container from '../../components/common/Container/Container';
+import useAxios from '../../hooks/useAxios';
 
 const PetsAndSupplies = () => {
+  const axiosPublic = useAxios();
   const [listings, setListings] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,7 +19,7 @@ const PetsAndSupplies = () => {
     const fetchListings = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:3000/listings');
+        const response = await axiosPublic.get('/listings');
         setListings(response.data);
       } catch (error) {
         console.error(error);
@@ -29,7 +30,7 @@ const PetsAndSupplies = () => {
     };
 
     fetchListings();
-  }, []);
+  }, [axiosPublic]);
 
   const filteredListings = useMemo(() => {
     let filtered = [...listings];

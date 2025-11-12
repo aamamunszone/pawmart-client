@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
 import toast from 'react-hot-toast';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const OrderModal = ({ listing, user, isOpen, onClose }) => {
+  const axiosPrivate = useAxiosSecure();
   const [formData, setFormData] = useState({
     productId: listing._id,
     productName: listing.name,
@@ -45,7 +46,7 @@ const OrderModal = ({ listing, user, isOpen, onClose }) => {
 
     try {
       setSubmitting(true);
-      await axios.post('http://localhost:3000/orders', formData);
+      await axiosPrivate.post('/orders', formData);
       toast.success('Order placed successfully! 🎉');
       onClose();
     } catch (error) {

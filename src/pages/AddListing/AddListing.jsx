@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import Container from '../../components/common/Container/Container';
 import useAuth from '../../hooks/useAuth';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const AddListing = () => {
   const { user } = useAuth();
+  const axiosPrivate = useAxiosSecure();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -59,7 +60,7 @@ const AddListing = () => {
 
     try {
       setLoading(true);
-      await axios.post('http://localhost:3000/listings', formData);
+      await axiosPrivate.post('/listings', formData);
       toast.success('Listing added successfully!');
       navigate('/shop');
     } catch (error) {

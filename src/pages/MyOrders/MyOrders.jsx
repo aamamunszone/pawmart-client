@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
 import Loader from '../../components/common/Loader/Loader';
 import useAuth from '../../hooks/useAuth';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const MyOrders = () => {
   const { user } = useAuth();
+  const axiosPrivate = useAxiosSecure();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -18,9 +19,7 @@ const MyOrders = () => {
     const fetchOrders = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get(
-          `http://localhost:3000/orders?email=${user.email}`
-        );
+        const { data } = await axiosPrivate.get(`/orders?email=${user.email}`);
         setOrders(data);
       } catch (error) {
         console.error(error);
@@ -31,7 +30,7 @@ const MyOrders = () => {
     };
 
     fetchOrders();
-  }, [user?.email]);
+  }, [user?.email, axiosPrivate]);
 
   const downloadReport = () => {
     if (!orders || orders.length === 0) {

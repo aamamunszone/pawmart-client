@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
 import Container from '../../components/common/Container/Container';
 import Loader from '../../components/common/Loader/Loader';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const MyListings = () => {
   const { user } = useAuth();
+  const axiosPrivate = useAxiosSecure();
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingListing, setEditingListing] = useState(null);
@@ -26,8 +27,8 @@ const MyListings = () => {
     const fetchUserListings = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(
-          `http://localhost:3000/listings?email=${user.email}`
+        const response = await axiosPrivate.get(
+          `/listings?email=${user.email}`
         );
         setListings(response.data);
       } catch (error) {
@@ -38,7 +39,7 @@ const MyListings = () => {
       }
     };
     fetchUserListings();
-  }, [user.email]);
+  }, [user?.email, axiosPrivate]);
 
   const handleDelete = async (id) => {
     const result = await Swal.fire({
@@ -53,7 +54,7 @@ const MyListings = () => {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:3000/listings/${id}`);
+        await axiosPrivate.delete(`/listings/${id}`);
         setListings((prev) => prev.filter((listing) => listing._id !== id));
 
         await Swal.fire({
@@ -95,8 +96,8 @@ const MyListings = () => {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(
-        `http://localhost:3000/listings/${editingListing._id}`,
+      const response = await axiosPrivate.put(
+        `/listings/${editingListing._id}`,
         editData
       );
       setListings((prev) =>

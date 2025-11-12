@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import ListingCard from '../../listing/ListingCard/ListingCard';
 import Loader from '../../common/Loader/Loader';
 import Container from '../../common/Container/Container';
+import useAxios from '../../../hooks/useAxios';
 
 const RecentListings = () => {
+  const axiosPublic = useAxios();
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -15,9 +16,7 @@ const RecentListings = () => {
   useEffect(() => {
     const fetchRecentListings = async () => {
       try {
-        const response = await axios.get(
-          'http://localhost:3000/listings/recent'
-        );
+        const response = await axiosPublic.get('/listings/recent');
         setListings(response.data);
         setLoading(false);
       } catch (error) {
@@ -28,7 +27,7 @@ const RecentListings = () => {
     };
 
     fetchRecentListings();
-  }, []);
+  }, [axiosPublic]);
 
   if (loading) {
     return <Loader />;
