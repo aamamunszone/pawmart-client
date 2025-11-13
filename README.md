@@ -91,6 +91,7 @@ It enables users to **adopt pets**, **buy pet supplies**, and **interact with a 
 - **React Icons** - Icon library
 - **React Hot Toast** - Notifications
 - **SweetAlert2** - Beautiful alerts
+- **React Simple Typewriter** - Typing effect
 
 ---
 
@@ -219,7 +220,8 @@ pawmart-client/
   "react-hot-toast": "^2.6.0",
   "sweetalert2": "^11.26.3",
   "jspdf": "^3.0.3",
-  "jspdf-autotable": "^5.0.2"
+  "jspdf-autotable": "^5.0.2",
+  "react-simple-typewriter": "^5.0.1"
 }
 ```
 

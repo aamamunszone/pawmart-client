@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Container from '../../common/Container/Container';
 import { useNavigate } from 'react-router';
+import { Typewriter } from 'react-simple-typewriter';
 
 const WhyAdopt = () => {
   const navigate = useNavigate();
@@ -176,8 +177,23 @@ const WhyAdopt = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.8, duration: 0.6 }}
             >
-              Ready to Make a Difference ?
+              <Typewriter
+                words={[
+                  'Ready to Make a Difference ?',
+                  "Adopt, Don't Shop !",
+                  'Give Them a Second Chance 💕',
+                  'Change a Life Today 🐾',
+                  'Be Their Forever Hero 🏡',
+                ]}
+                loop={true}
+                cursor
+                cursorStyle="_"
+                typeSpeed={70}
+                deleteSpeed={50}
+                delaySpeed={2000}
+              />
             </motion.h3>
+
             <motion.p
               className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto"
               initial={{ opacity: 0 }}
