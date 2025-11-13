@@ -50,7 +50,7 @@ const ListingDetails = () => {
   if (!listing) {
     return (
       <>
-        <title>{'PawMart | Not Found'}</title>
+        <title>PawMart | Not Found</title>
 
         <div className="min-h-screen flex items-center justify-center bg-base-100">
           <div className="text-center">
@@ -72,12 +72,12 @@ const ListingDetails = () => {
 
   return (
     <>
-      <title>{`PawMart | ${listing.name || 'Details'}`}</title>
+      <title>{`PawMart | ${listing.name || 'Listing'}'s Details`}</title>
 
       <div className="min-h-screen bg-base-100">
         {/* Hero Section */}
         <motion.div
-          className="relative bg-linear-to-br from-blue-600 via-cyan-500 to-teal-500 py-12"
+          className="relative bg-linear-to-br from-blue-600 via-cyan-500 to-teal-500 pt-14 pb-28"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -85,9 +85,9 @@ const ListingDetails = () => {
           <Container>
             <motion.button
               onClick={() => navigate(-1)}
-              whileHover={{ scale: 1.05, x: -5 }}
+              whileHover={{ scale: 1.0, x: -5 }}
               whileTap={{ scale: 0.98 }}
-              className="btn btn-ghost text-white gap-2 mb-4"
+              className="flex justify-between items-center gap-2.5 text-primary-content cursor-pointer mb-4"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
@@ -166,12 +166,12 @@ const ListingDetails = () => {
             >
               {/* Title */}
               <div>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-base-content mb-2">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-base-content mb-4">
                   {listing.name}
                 </h1>
-                <div className="flex items-center gap-2 text-base-content/70">
+                <div className="flex items-center text-xl gap-2 text-base-content/70">
                   <svg
-                    className="w-5 h-5"
+                    className="w-7 h-7"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

@@ -101,14 +101,14 @@ const PetsAndSupplies = () => {
       <div className="min-h-screen bg-base-100">
         {/* Hero Section */}
         <motion.div
-          className="relative bg-linear-to-br from-blue-600 via-cyan-500 to-teal-500 py-20"
+          className="relative bg-linear-to-br from-blue-600 via-cyan-500 to-teal-500 pt-14 pb-28"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
           <Container className="text-center">
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 drop-shadow-lg"
+              className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 drop-shadow-lg"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
@@ -178,7 +178,7 @@ const PetsAndSupplies = () => {
             {/* Category Filters */}
             <div>
               <h3 className="text-base-content font-semibold mb-4">
-                Filter by Category:
+                Filter by Category :
               </h3>
               <div className="flex flex-wrap gap-3">
                 {categories.map((category) => (
@@ -228,7 +228,7 @@ const PetsAndSupplies = () => {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              key={`${selectedCategory}-${searchQuery}`} // Smooth re-animation
+              key={`${selectedCategory}-${searchQuery}`}
             >
               {filteredListings.map((listing) => (
                 <motion.div key={listing._id} variants={cardVariants}>
@@ -250,7 +250,10 @@ const PetsAndSupplies = () => {
               <p className="text-base-content/70 mb-6">
                 Try adjusting your filters or search query
               </p>
-              <button onClick={handleResetFilters} className="btn btn-primary">
+              <button
+                onClick={handleResetFilters}
+                className="btn btn-primary rounded-full"
+              >
                 Reset Filters
               </button>
             </motion.div>

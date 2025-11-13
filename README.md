@@ -164,12 +164,10 @@ pawmart-client/
 ├── src/
 │   ├── assets/              # Images, fonts
 │   ├── components/          # Reusable components
-│   │   ├── auth/           # Auth components
 │   │   ├── common/         # Shared components
 │   │   ├── home/           # Home page sections
 │   │   ├── listing/        # Listing components
-│   │   ├── shared/         # Layout components
-│   │   └── ui/             # UI components
+│   │   └── shared/         # Layout components
 │   ├── contexts/           # React Context
 │   ├── firebase/           # Firebase config
 │   ├── hooks/              # Custom hooks
@@ -276,7 +274,7 @@ firebase deploy
 
 ### Live Site
 
-🌐 [https://pawmart-zone.web.app/](https://pawmart-zone.web.app)
+🌐 [https://pawmart-zone.web.app](https://pawmart-zone.web.app)
 
 ---
 
@@ -307,7 +305,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Tailwind CSS](https://tailwindcss.com/) - Styling
 - [Firebase](https://firebase.google.com/) - Authentication & Hosting
 - [Unsplash](https://unsplash.com/) - Pet images
-- Programming Hero - Learning platform
+- [Programming Hero](https://www.programming-hero.com/) - Learning platform
 
 ---
 

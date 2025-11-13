@@ -265,14 +265,14 @@ const OrderModal = ({ listing, user, isOpen, onClose }) => {
             <button
               type="button"
               onClick={onClose}
-              className="btn btn-outline flex-1"
+              className="btn btn-outline flex-1 rounded-md"
               disabled={submitting}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="btn btn-primary flex-1"
+              className="btn btn-primary flex-1 rounded-md"
               disabled={submitting}
             >
               {submitting ? (

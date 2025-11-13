@@ -8,7 +8,7 @@ import PetHeroes from '../../components/home/PetHeroes/PetHeroes';
 const Home = () => {
   return (
     <>
-      <title>{'PawMart | Pet Adoption & Supplies'}</title>
+      <title>PawMart | Pet Adoption & Supplies</title>
 
       {/* Hero Section */}
       <section>

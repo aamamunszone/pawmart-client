@@ -66,7 +66,7 @@ const ListingCard = ({ listing }) => {
             </span>
           ) : (
             <span className="text-2xl font-black bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              ৳{listing.price}
+              ৳ {listing.price}
             </span>
           )}
         </div>

@@ -29,7 +29,6 @@ const AddListing = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Price = 0 if category is Pets
     if (name === 'category') {
       setFormData((prev) => ({
         ...prev,
@@ -45,7 +44,6 @@ const AddListing = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Simple validation
     if (
       !formData.name ||
       !formData.category ||
@@ -73,19 +71,52 @@ const AddListing = () => {
 
   return (
     <>
-      <title>{'PawMart | Add Listing'}</title>
+      <title>PawMart | Add Listing</title>
 
-      <div className="min-h-screen bg-base-100 py-12">
-        <Container className="max-w-3xl">
-          <motion.h1
-            className="text-4xl md:text-5xl font-bold text-primary mb-8 text-center"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            🧺 Add New Listing
-          </motion.h1>
+      <div className="min-h-screen bg-base-100">
+        {/* Hero Section */}
+        <motion.div
+          className="relative bg-linear-to-br from-blue-600 via-cyan-500 to-teal-500 pt-14 pb-28"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <Container className="text-center">
+            <motion.h1
+              className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-3 drop-shadow-lg"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+            >
+              🧺 Add New Listing
+            </motion.h1>
+            <motion.p
+              className="text-base md:text-lg text-white/90 max-w-2xl mx-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+            >
+              Add your pets or products and share with the PawMart community
+            </motion.p>
+          </Container>
 
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg
+              viewBox="0 0 1440 80"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-auto"
+            >
+              <path
+                d="M0 0L60 8C120 16 240 32 360 37.3C480 43 600 37 720 34.7C840 32 960 32 1080 37.3C1200 43 1320 53 1380 58.7L1440 64V80H1380C1320 80 1200 80 1080 80C960 80 840 80 720 80C600 80 480 80 360 80C240 80 120 80 60 80H0V0Z"
+                className="fill-base-100"
+              />
+            </svg>
+          </div>
+        </motion.div>
+
+        {/* Form Section */}
+        <Container className="py-12 -mt-6 max-w-3xl">
           <motion.form
             onSubmit={handleSubmit}
             className="bg-base-200 rounded-2xl shadow-xl p-8 space-y-6"
@@ -214,7 +245,7 @@ const AddListing = () => {
               />
             </div>
 
-            {/* Email (readonly) */}
+            {/* Email */}
             <div>
               <label className="label">
                 <span className="label-text font-semibold">Email</span>
@@ -228,7 +259,7 @@ const AddListing = () => {
               />
             </div>
 
-            {/* Submit Button */}
+            {/* Submit */}
             <div className="text-center">
               <button
                 type="submit"

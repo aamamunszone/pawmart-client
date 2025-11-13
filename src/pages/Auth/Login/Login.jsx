@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { FcGoogle } from 'react-icons/fc';
 import toast from 'react-hot-toast';
+import { motion } from 'framer-motion';
 import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
@@ -46,101 +47,112 @@ const Login = () => {
 
   return (
     <>
-      <title>{'PawMart | Login'}</title>
+      <title>PawMart | Login</title>
 
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
-        <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg">
-          <div>
-            <h2 className="text-center text-3xl font-bold text-gray-900">
-              Welcome Back!
-            </h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
-              Login to continue to PawMart
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <motion.div
+          className="w-full max-w-4xl bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Left-side Info Panel (visible on all devices) */}
+          <div className="w-full md:w-1/2 bg-linear-to-br from-blue-600 via-cyan-500 to-teal-500 text-white flex flex-col justify-center items-center p-8 text-center">
+            <h1 className="text-4xl md:text-5xl font-black mb-4 drop-shadow-lg">
+              🐾 Welcome Back!
+            </h1>
+            <p className="text-lg md:text-xl text-white/90 mb-6">
+              Login to continue your PawMart journey and manage your listings.
+            </p>
+            <p className="text-sm md:text-base text-white/80">
+              Enter your credentials or use Google to sign in quickly.
             </p>
           </div>
 
-          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-            <div className="space-y-4">
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Email Address
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
-                  placeholder="Enter your email"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Password
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  value={formData.password}
-                  onChange={handleChange}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
-                  placeholder="Enter your password"
-                />
-              </div>
+          {/* Right-side Form */}
+          <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
+            <div className="text-center mb-6">
+              <h2 className="text-3xl font-bold text-gray-900">Login</h2>
+              <p className="mt-2 text-sm text-gray-600">
+                Enter your credentials to access your account
+              </p>
             </div>
 
-            <button
-              type="submit"
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-            >
-              Login
-            </button>
-          </form>
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Email Address
+                  </label>
+                  <input
+                    name="email"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Enter your email"
+                    className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary border-gray-300"
+                  />
+                </div>
 
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Password
+                  </label>
+                  <input
+                    name="password"
+                    type="password"
+                    required
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Enter your password"
+                    className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary border-gray-300"
+                  />
+                </div>
               </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">
-                  Or continue with
+
+              <button
+                type="submit"
+                className="w-full py-3 px-4 rounded-md shadow-sm text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              >
+                Login
+              </button>
+            </form>
+
+            <div className="mt-6">
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-gray-500">
+                    Or continue with
+                  </span>
+                </div>
+              </div>
+
+              <button
+                onClick={handleGoogleSignIn}
+                className="mt-4 w-full flex items-center justify-center gap-3 py-3 px-4 border rounded-md shadow-sm bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              >
+                <FcGoogle className="text-2xl" />
+                <span className="text-sm font-medium text-gray-700">
+                  Login with Google
                 </span>
-              </div>
+              </button>
             </div>
 
-            <button
-              onClick={handleGoogleSignIn}
-              className="mt-4 w-full flex items-center justify-center gap-3 py-3 px-4 border border-gray-300 rounded-md shadow-sm bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-            >
-              <FcGoogle className="text-2xl" />
-              <span className="text-sm font-medium text-gray-700">
-                Login with Google
-              </span>
-            </button>
+            <p className="mt-4 text-center text-sm text-gray-600">
+              Don't have an account?{' '}
+              <Link
+                to="/auth/register"
+                className="font-medium text-primary hover:text-primary/90"
+              >
+                Register here
+              </Link>
+            </p>
           </div>
-
-          <p className="mt-4 text-center text-sm text-gray-600">
-            Don't have an account?{' '}
-            <Link
-              to="/auth/register"
-              className="font-medium text-primary hover:text-primary/90"
-            >
-              Register here
-            </Link>
-          </p>
-        </div>
+        </motion.div>
       </div>
     </>
   );

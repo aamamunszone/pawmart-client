@@ -125,7 +125,7 @@ const CategoryFiltered = () => {
         <motion.div
           className={`relative bg-linear-to-br ${getCategoryColor(
             categoryName
-          )} py-16`}
+          )} pt-14 pb-28`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -212,9 +212,9 @@ const CategoryFiltered = () => {
               {/* Back Button */}
               <motion.button
                 onClick={() => navigate('/shop')}
-                whileHover={{ scale: 1.05, y: -2 }}
+                whileHover={{ scale: 1.0, x: -5 }}
                 whileTap={{ scale: 0.98 }}
-                className="btn btn-outline btn-primary gap-2 w-full md:w-auto"
+                className="btn btn-outline rounded-md gap-2 w-full md:w-auto"
               >
                 <svg
                   className="w-5 h-5"
@@ -288,14 +288,6 @@ const CategoryFiltered = () => {
                   : `No listings available in this category yet`}
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery('')}
-                    className="btn btn-primary"
-                  >
-                    Clear Search
-                  </button>
-                )}
                 <button
                   onClick={() => navigate('/shop')}
                   className="btn btn-outline btn-primary"
@@ -309,7 +301,7 @@ const CategoryFiltered = () => {
 
         {/* Info Section */}
         {filteredListings.length > 0 && (
-          <div className="container mx-auto px-4 pb-12">
+          <Container className="pb-12">
             <motion.div
               className={`bg-linear-to-r ${getCategoryColor(
                 categoryName
@@ -332,7 +324,7 @@ const CategoryFiltered = () => {
                 </div>
               </div>
             </motion.div>
-          </div>
+          </Container>
         )}
       </div>
     </>

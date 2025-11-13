@@ -9,6 +9,7 @@ import {
   FaHome,
   FaGift,
 } from 'react-icons/fa';
+import Container from '../../components/common/Container/Container';
 
 const Services = () => {
   const services = [
@@ -118,17 +119,17 @@ const Services = () => {
 
   return (
     <>
-      <title>{'PawMart | Our Services'}</title>
+      <title>PawMart | Our Services</title>
 
       <div className="min-h-screen bg-base-100">
         {/* Hero Section */}
         <motion.div
-          className="relative bg-linear-to-br from-blue-600 via-cyan-500 to-teal-500 py-16"
+          className="relative bg-linear-to-br from-blue-600 via-cyan-500 to-teal-500 pt-14 pb-28"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="container mx-auto px-4 text-center">
+          <Container className="text-center">
             <motion.div
               className="text-6xl md:text-7xl mb-4"
               initial={{ scale: 0, rotate: -180 }}
@@ -153,7 +154,7 @@ const Services = () => {
             >
               Everything you need for your beloved pets, all in one place
             </motion.p>
-          </div>
+          </Container>
 
           {/* Decorative wave */}
           <div className="absolute bottom-0 left-0 right-0">
@@ -172,7 +173,7 @@ const Services = () => {
         </motion.div>
 
         {/* Services Grid */}
-        <div className="container mx-auto px-4 py-12 -mt-6">
+        <Container className="py-12 -mt-6">
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
             variants={containerVariants}
@@ -216,10 +217,10 @@ const Services = () => {
               </motion.div>
             ))}
           </motion.div>
-        </div>
+        </Container>
 
         {/* CTA Section */}
-        <div className="container mx-auto px-4 pb-12">
+        <Container className="pb-12">
           <motion.div
             className="bg-linear-to-r from-blue-600 to-cyan-500 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl"
             initial={{ opacity: 0, y: 30 }}
@@ -236,7 +237,7 @@ const Services = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
-                onClick={() => (window.location.href = '/pets-supplies')}
+                onClick={() => (window.location.href = '/shop')}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 className="btn btn-lg bg-white text-blue-600 hover:bg-white/90 border-0 gap-2"
@@ -255,10 +256,10 @@ const Services = () => {
               </motion.button>
             </div>
           </motion.div>
-        </div>
+        </Container>
 
         {/* Stats Section */}
-        <div className="container mx-auto px-4 pb-12">
+        <Container className="pb-12">
           <motion.div
             className="grid grid-cols-2 md:grid-cols-4 gap-6"
             initial={{ opacity: 0 }}
@@ -289,7 +290,7 @@ const Services = () => {
               </motion.div>
             ))}
           </motion.div>
-        </div>
+        </Container>
       </div>
     </>
   );

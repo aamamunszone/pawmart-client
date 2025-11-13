@@ -6,6 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import Container from '../../components/common/Container/Container';
 
 const MyOrders = () => {
   const { user } = useAuth();
@@ -50,7 +51,7 @@ const MyOrders = () => {
       doc.setFontSize(18);
       doc.setFont('helvetica', 'bold');
       doc.setTextColor(37, 99, 235);
-      doc.text('🐾 PawMart - My Orders Report', 14, 15);
+      doc.text('PawMart - My Orders Report', 14, 15);
 
       // Add user info
       doc.setFontSize(10);
@@ -63,7 +64,7 @@ const MyOrders = () => {
       const tableColumn = [
         'Product Name',
         'Buyer Name',
-        'Price (৳)',
+        'Price ( Tk. )',
         'Qty',
         'Address',
         'Date',
@@ -74,7 +75,7 @@ const MyOrders = () => {
       const tableRows = orders.map((order) => [
         order.productName || order.listingName || 'N/A',
         order.buyerName || 'N/A',
-        order.price === 0 ? 'Free Adoption' : `৳${order.price}`,
+        order.price === 0 ? 'Free Adoption' : `Tk. ${order.price}`,
         order.quantity || 1,
         order.address || 'N/A',
         new Date(order.date).toLocaleDateString('en-GB'),
@@ -162,12 +163,12 @@ const MyOrders = () => {
       <div className="min-h-screen bg-base-100">
         {/* Hero Section */}
         <motion.div
-          className="relative bg-linear-to-br from-blue-600 via-cyan-500 to-teal-500 py-16"
+          className="relative bg-linear-to-br from-blue-600 via-cyan-500 to-teal-500 pt-14 pb-28"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="container mx-auto px-4 text-center">
+          <Container className="text-center">
             <motion.h1
               className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-3 drop-shadow-lg"
               initial={{ opacity: 0, y: -20 }}
@@ -184,7 +185,7 @@ const MyOrders = () => {
             >
               View and manage all your adoption requests and purchases
             </motion.p>
-          </div>
+          </Container>
 
           {/* Decorative wave */}
           <div className="absolute bottom-0 left-0 right-0">
@@ -203,7 +204,7 @@ const MyOrders = () => {
         </motion.div>
 
         {/* Main Content */}
-        <div className="container mx-auto px-4 py-12 -mt-6">
+        <Container className="py-12 -mt-6">
           {orders.length === 0 ? (
             <motion.div
               className="text-center py-20"
@@ -219,8 +220,8 @@ const MyOrders = () => {
                 You haven't placed any orders yet.
               </p>
               <button
-                onClick={() => (window.location.href = '/pets-supplies')}
-                className="btn btn-primary"
+                onClick={() => (window.location.href = '/shop')}
+                className="btn btn-primary rounded-full"
               >
                 Browse Pets & Supplies
               </button>
@@ -235,7 +236,7 @@ const MyOrders = () => {
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                 <div>
                   <h2 className="text-2xl font-bold text-base-content">
-                    Total Orders:{' '}
+                    Total Orders :{' '}
                     <span className="text-primary">{orders.length}</span>
                   </h2>
                   <p className="text-base-content/70 text-sm mt-1">
@@ -246,7 +247,7 @@ const MyOrders = () => {
                   onClick={downloadReport}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="btn btn-primary gap-2"
+                  className="btn btn-primary gap-2 rounded-full"
                 >
                   <svg
                     className="w-5 h-5"
@@ -294,12 +295,12 @@ const MyOrders = () => {
                           <td>{order.buyerName}</td>
                           <td>
                             {order.price === 0 ? (
-                              <span className="badge badge-success gap-2">
+                              <span className="badge badge-success gap-2 whitespace-nowrap rounded-full px-3 py-4">
                                 🎁 Free Adoption
                               </span>
                             ) : (
                               <span className="font-semibold">
-                                ৳{order.price}
+                                ৳ {order.price}
                               </span>
                             )}
                           </td>
@@ -361,7 +362,7 @@ const MyOrders = () => {
               </motion.div>
             </motion.div>
           )}
-        </div>
+        </Container>
       </div>
     </>
   );
