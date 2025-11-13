@@ -16,10 +16,10 @@
   --color-base-300: #e9ecef;
   --color-base-content: #212529;
 
-  --color-primary: #ff6b6b;
+  --color-primary: #8e2de2;
   --color-primary-content: #ffffff;
 
-  --color-secondary: #4ecdc4;
+  --color-secondary: #4a00e0;
   --color-secondary-content: #ffffff;
 
   --color-accent: #ffe66d;
@@ -31,10 +31,10 @@
   --color-info: #3b82f6;
   --color-info-content: #ffffff;
 
-  --color-success: #10b981;
+  --color-success: #0f9b0f;
   --color-success-content: #ffffff;
 
-  --color-warning: #f59e0b;
+  --color-warning: #10b981;
   --color-warning-content: #ffffff;
 
   --color-error: #ef4444;
@@ -48,10 +48,10 @@
   --color-base-300: #374151;
   --color-base-content: #f9fafb;
 
-  --color-primary: #ff6b6b;
+  --color-primary: #8e2de2;
   --color-primary-content: #ffffff;
 
-  --color-secondary: #4ecdc4;
+  --color-secondary: #4a00e0;
   --color-secondary-content: #ffffff;
 
   --color-accent: #ffe66d;
@@ -63,10 +63,10 @@
   --color-info: #60a5fa;
   --color-info-content: #ffffff;
 
-  --color-success: #34d399;
+  --color-success: #0f9b0f;
   --color-success-content: #ffffff;
 
-  --color-warning: #fbbf24;
+  --color-warning: #10b981;
   --color-warning-content: #1f2937;
 
   --color-error: #f87171;
@@ -77,8 +77,3 @@
 body {
   font-family: 'Inter', sans-serif;
 }
-
-/* For Debugging */
-/* * {
-  border: 1px solid red;
-} */

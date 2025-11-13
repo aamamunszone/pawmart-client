@@ -173,9 +173,7 @@ const AddListing = () => {
                 onChange={handleChange}
                 min={0}
                 className={`input input-bordered w-full ${
-                  formData.category === 'Pets'
-                    ? 'bg-gray-100 cursor-not-allowed'
-                    : ''
+                  formData.category === 'Pets' ? 'cursor-not-allowed' : ''
                 }`}
                 disabled={formData.category === 'Pets'}
                 required={formData.category !== 'Pets'}
@@ -255,7 +253,7 @@ const AddListing = () => {
                 name="email"
                 value={formData.email}
                 readOnly
-                className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
+                className="input input-bordered w-full cursor-not-allowed"
               />
             </div>
 
