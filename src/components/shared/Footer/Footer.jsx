@@ -53,7 +53,7 @@ const Footer = () => {
     {
       name: 'LinkedIn',
       icon: FaLinkedin,
-      url: 'linkedin.com/in/aamamunszone',
+      url: 'https://www.linkedin.com/in/aamamunszone',
       color: 'hover:text-blue-600',
     },
     {
