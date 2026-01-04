@@ -34,11 +34,7 @@ export const router = createBrowserRouter([
       { path: 'contact', Component: Contact },
       {
         path: 'listing-details/:id',
-        element: (
-          <PrivateRoute>
-            <ListingDetails />
-          </PrivateRoute>
-        ),
+        Component: ListingDetails,
       },
       { path: 'auth/register', Component: Register },
       { path: 'auth/login', Component: Login },

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router';
+import { FaStar } from 'react-icons/fa';
 
 const ListingCard = ({ listing }) => {
   return (
@@ -34,6 +35,11 @@ const ListingCard = ({ listing }) => {
           {listing.name}
         </h3>
 
+        {/* Description */}
+        <p className="text-sm text-base-content/60 mb-3 line-clamp-1">
+          {listing.description || 'No description available'}
+        </p>
+
         {/* Location */}
         <div className="flex items-center gap-2 text-base-content/70 mb-3">
           <svg
@@ -58,16 +64,29 @@ const ListingCard = ({ listing }) => {
           <span className="text-sm">{listing.location}</span>
         </div>
 
-        {/* Price */}
-        <div className="mb-4">
-          {listing.price === 0 || listing.category === 'Pets' ? (
-            <span className="text-2xl font-black bg-linear-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
-              Free for Adoption
-            </span>
-          ) : (
-            <span className="text-2xl font-black bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              ৳ {listing.price}
-            </span>
+        {/* Price and Rating */}
+        <div className="flex items-center justify-between mb-4">
+          {/* Price */}
+          <div>
+            {listing.price === 0 || listing.category === 'Pets' ? (
+              <span className="text-2xl font-black bg-linear-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+                Free
+              </span>
+            ) : (
+              <span className="text-2xl font-black bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                ৳ {listing.price}
+              </span>
+            )}
+          </div>
+
+          {/* Rating */}
+          {listing.rating && (
+            <div className="flex items-center gap-1 bg-yellow-100 dark:bg-yellow-900/30 px-3 py-1.5 rounded-full">
+              <FaStar className="text-yellow-500 text-sm" />
+              <span className="text-sm font-bold text-base-content">
+                {listing.rating}
+              </span>
+            </div>
           )}
         </div>
 

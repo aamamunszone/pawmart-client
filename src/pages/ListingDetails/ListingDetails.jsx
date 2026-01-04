@@ -1,27 +1,30 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router';
+import { useParams, useNavigate, useLocation } from 'react-router';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
+import { FaStar } from 'react-icons/fa';
 import useAuth from '../../hooks/useAuth';
 import Loader from '../../components/common/Loader/Loader';
 import OrderModal from '../../components/listing/OrderModal/OrderModal';
 import Container from '../../components/common/Container/Container';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useAxios from '../../hooks/useAxios';
 
 const ListingDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useAuth();
-  const axiosPrivate = useAxiosSecure();
+  const axiosPublic = useAxios();
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(0);
 
   useEffect(() => {
     const fetchListingDetails = async () => {
       try {
         setLoading(true);
-        const { data } = await axiosPrivate.get(`/listings/${id}`);
+        const { data } = await axiosPublic.get(`/listings/${id}`);
         setListing(data);
       } catch (error) {
         console.error(error);
@@ -33,10 +36,16 @@ const ListingDetails = () => {
     };
 
     fetchListingDetails();
-  }, [id, navigate, axiosPrivate]);
+  }, [id, navigate, axiosPublic]);
 
   const handleOrderClick = () => {
-    setIsModalOpen(true);
+    if (user) {
+      setIsModalOpen(true);
+    } else {
+      navigate('/auth/login', {
+        state: { from: location.pathname },
+      });
+    }
   };
 
   const closeModal = () => {
@@ -69,6 +78,16 @@ const ListingDetails = () => {
       </>
     );
   }
+
+  // Multiple images array (main image + additional images if available)
+  const images = [
+    listing.image,
+    ...(listing.additionalImages || [
+      listing.image,
+      listing.image,
+      listing.image,
+    ]),
+  ].slice(0, 4);
 
   return (
     <>
@@ -140,9 +159,10 @@ const ListingDetails = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
             >
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl group">
+              {/* Main Image */}
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl group mb-4">
                 <img
-                  src={listing.image}
+                  src={images[selectedImage]}
                   alt={listing.name}
                   className="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -155,6 +175,29 @@ const ListingDetails = () => {
                   </span>
                 </div>
               </div>
+
+              {/* Thumbnail Gallery */}
+              <div className="grid grid-cols-4 gap-3">
+                {images.map((img, index) => (
+                  <motion.div
+                    key={index}
+                    onClick={() => setSelectedImage(index)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`relative rounded-xl overflow-hidden cursor-pointer shadow-lg transition-all duration-300 ${
+                      selectedImage === index
+                        ? 'ring-4 ring-blue-500 ring-offset-2 ring-offset-base-100'
+                        : 'opacity-70 hover:opacity-100'
+                    }`}
+                  >
+                    <img
+                      src={img}
+                      alt={`${listing.name} ${index + 1}`}
+                      className="w-full h-24 object-cover"
+                    />
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
 
             {/* Details Section */}
@@ -164,11 +207,21 @@ const ListingDetails = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
             >
-              {/* Title */}
+              {/* Title and Rating */}
               <div>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-base-content mb-4">
-                  {listing.name}
-                </h1>
+                <div className="flex items-start justify-between gap-4 mb-2">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-base-content">
+                    {listing.name}
+                  </h1>
+                  {listing.rating && (
+                    <div className="flex items-center gap-2 bg-yellow-100 dark:bg-yellow-900/30 px-4 py-2 rounded-full shrink-0">
+                      <FaStar className="text-yellow-500 text-lg" />
+                      <span className="text-lg font-bold text-base-content">
+                        {listing.rating}
+                      </span>
+                    </div>
+                  )}
+                </div>
                 <div className="flex items-center text-xl gap-2 text-base-content/70">
                   <svg
                     className="w-7 h-7"
