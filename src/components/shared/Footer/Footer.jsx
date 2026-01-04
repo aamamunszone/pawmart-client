@@ -35,31 +35,31 @@ const Footer = () => {
     {
       name: 'Facebook',
       icon: FaFacebook,
-      url: 'https://facebook.com',
+      url: 'https://www.facebook.com/aamamunszone',
       color: 'hover:text-blue-500',
     },
     {
       name: 'X (Twitter)',
       icon: FaXTwitter,
-      url: 'https://twitter.com',
+      url: 'https://x.com/aamamunszone',
       color: 'hover:text-gray-900 dark:hover:text-white',
     },
     {
       name: 'Instagram',
       icon: FaInstagram,
-      url: 'https://instagram.com',
+      url: 'https://www.instagram.com/aamamunszone',
       color: 'hover:text-pink-500',
     },
     {
       name: 'LinkedIn',
       icon: FaLinkedin,
-      url: 'https://linkedin.com',
+      url: 'linkedin.com/in/aamamunszone',
       color: 'hover:text-blue-600',
     },
     {
       name: 'YouTube',
       icon: FaYoutube,
-      url: 'https://youtube.com',
+      url: 'https://www.youtube.com/@aamamunszone',
       color: 'hover:text-red-500',
     },
   ];
