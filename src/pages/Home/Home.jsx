@@ -4,6 +4,11 @@ import CategorySection from '../../components/home/CategorySection/CategorySecti
 import RecentListings from '../../components/home/RecentListings/RecentListings';
 import WhyAdopt from '../../components/home/WhyAdopt/WhyAdopt';
 import PetHeroes from '../../components/home/PetHeroes/PetHeroes';
+import Testimonials from '../../components/home/Testimonials/Testimonials';
+import BlogSection from '../../components/home/BlogSection/BlogSection';
+import Newsletter from '../../components/home/Newsletter/Newsletter';
+import FAQ from '../../components/home/FAQ/FAQ';
+import CTASection from '../../components/home/CTASection/CTASection';
 
 const Home = () => {
   return (
@@ -33,6 +38,31 @@ const Home = () => {
       {/* PetHeroes Section */}
       <section>
         <PetHeroes />
+      </section>
+
+      {/* Testimonials Section */}
+      <section>
+        <Testimonials />
+      </section>
+
+      {/* Blog Section */}
+      <section>
+        <BlogSection />
+      </section>
+
+      {/* Newsletter Section */}
+      <section>
+        <Newsletter />
+      </section>
+
+      {/* FAQ Section */}
+      <section>
+        <FAQ />
+      </section>
+
+      {/* CTA Section */}
+      <section>
+        <CTASection />
       </section>
     </>
   );
