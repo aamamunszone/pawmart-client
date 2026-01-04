@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
+import { FaStar } from 'react-icons/fa';
 import ListingCard from '../../components/listing/ListingCard/ListingCard';
 import Loader from '../../components/common/Loader/Loader';
 import Container from '../../components/common/Container/Container';
@@ -10,10 +11,15 @@ const PetsAndSupplies = () => {
   const axiosPublic = useAxios();
   const [listings, setListings] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedRating, setSelectedRating] = useState('All');
+  const [sortByPrice, setSortByPrice] = useState('default');
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
 
   const categories = ['All', 'Pets', 'Food', 'Accessories', 'Care Products'];
+  const ratings = ['All', '5', '4', '3', '2', '1'];
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -42,6 +48,15 @@ const PetsAndSupplies = () => {
       );
     }
 
+    // Rating filter
+    if (selectedRating !== 'All') {
+      const ratingValue = parseInt(selectedRating);
+      filtered = filtered.filter(
+        (listing) =>
+          listing.rating && Math.floor(listing.rating) === ratingValue
+      );
+    }
+
     // Search filter
     if (searchQuery.trim() !== '') {
       const query = searchQuery.toLowerCase();
@@ -52,11 +67,37 @@ const PetsAndSupplies = () => {
       );
     }
 
+    // Sort by price
+    if (sortByPrice === 'low-to-high') {
+      filtered.sort((a, b) => a.price - b.price);
+    } else if (sortByPrice === 'high-to-low') {
+      filtered.sort((a, b) => b.price - a.price);
+    }
+
     return filtered;
-  }, [listings, selectedCategory, searchQuery]);
+  }, [listings, selectedCategory, selectedRating, searchQuery, sortByPrice]);
+
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredListings.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentListings = filteredListings.slice(startIndex, endIndex);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, selectedRating, searchQuery, sortByPrice]);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
+  };
+
+  const handleRatingChange = (rating) => {
+    setSelectedRating(rating);
+  };
+
+  const handleSortChange = (e) => {
+    setSortByPrice(e.target.value);
   };
 
   const handleSearchChange = (e) => {
@@ -65,7 +106,15 @@ const PetsAndSupplies = () => {
 
   const handleResetFilters = () => {
     setSelectedCategory('All');
+    setSelectedRating('All');
+    setSortByPrice('default');
     setSearchQuery('');
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const containerVariants = {
@@ -175,8 +224,24 @@ const PetsAndSupplies = () => {
               </div>
             </div>
 
+            {/* Sort by Price */}
+            <div className="mb-6">
+              <h3 className="text-base-content font-semibold mb-4">
+                Sort by Price :
+              </h3>
+              <select
+                value={sortByPrice}
+                onChange={handleSortChange}
+                className="w-full md:w-auto px-6 py-3 rounded-full bg-base-100 border-2 border-transparent focus:border-primary focus:outline-none transition-all duration-300 text-base-content font-semibold cursor-pointer"
+              >
+                <option value="default">Default</option>
+                <option value="low-to-high">Price: Low to High</option>
+                <option value="high-to-low">Price: High to Low</option>
+              </select>
+            </div>
+
             {/* Category Filters */}
-            <div>
+            <div className="mb-6">
               <h3 className="text-base-content font-semibold mb-4">
                 Filter by Category :
               </h3>
@@ -199,6 +264,37 @@ const PetsAndSupplies = () => {
               </div>
             </div>
 
+            {/* Rating Filters */}
+            <div>
+              <h3 className="text-base-content font-semibold mb-4">
+                Filter by Rating :
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {ratings.map((rating) => (
+                  <motion.button
+                    key={rating}
+                    onClick={() => handleRatingChange(rating)}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`px-6 py-3 rounded-full font-bold transition-all duration-300 flex items-center gap-2 ${
+                      selectedRating === rating
+                        ? 'bg-linear-to-r from-yellow-500 to-orange-500 text-white shadow-lg'
+                        : 'bg-base-100 text-base-content hover:bg-base-300'
+                    }`}
+                  >
+                    {rating === 'All' ? (
+                      'All Ratings'
+                    ) : (
+                      <>
+                        <FaStar className="text-current" />
+                        {rating}+
+                      </>
+                    )}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+
             {/* Results Count */}
             <div className="mt-6 flex items-center justify-between">
               <p className="text-base-content/70">
@@ -208,12 +304,15 @@ const PetsAndSupplies = () => {
                 </span>{' '}
                 result{filteredListings.length !== 1 ? 's' : ''}
               </p>
-              {searchQuery && (
+              {(searchQuery ||
+                selectedCategory !== 'All' ||
+                selectedRating !== 'All' ||
+                sortByPrice !== 'default') && (
                 <button
-                  onClick={() => setSearchQuery('')}
-                  className="text-sm text-error hover:underline"
+                  onClick={handleResetFilters}
+                  className="text-sm text-error hover:underline font-semibold"
                 >
-                  Clear search
+                  Reset All Filters
                 </button>
               )}
             </div>
@@ -222,20 +321,106 @@ const PetsAndSupplies = () => {
 
         {/* Listings Grid */}
         <Container className="py-12">
-          {filteredListings.length > 0 ? (
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              key={`${selectedCategory}-${searchQuery}`}
-            >
-              {filteredListings.map((listing) => (
-                <motion.div key={listing._id} variants={cardVariants}>
-                  <ListingCard listing={listing} />
+          {currentListings.length > 0 ? (
+            <>
+              <motion.div
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                key={`${selectedCategory}-${selectedRating}-${searchQuery}-${sortByPrice}-${currentPage}`}
+              >
+                {currentListings.map((listing) => (
+                  <motion.div key={listing._id} variants={cardVariants}>
+                    <ListingCard listing={listing} />
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <motion.div
+                  className="flex justify-center items-center gap-2 mt-12"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  {/* Previous Button */}
+                  <motion.button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    whileHover={{ scale: currentPage === 1 ? 1 : 1.05 }}
+                    whileTap={{ scale: currentPage === 1 ? 1 : 0.95 }}
+                    className={`px-4 py-2 rounded-full font-semibold transition-all ${
+                      currentPage === 1
+                        ? 'bg-base-300 text-base-content/50 cursor-not-allowed'
+                        : 'bg-linear-to-r from-blue-600 to-cyan-500 text-white hover:shadow-lg'
+                    }`}
+                  >
+                    Previous
+                  </motion.button>
+
+                  {/* Page Numbers */}
+                  <div className="flex gap-2">
+                    {[...Array(totalPages)].map((_, index) => {
+                      const page = index + 1;
+                      // Show first page, last page, current page, and pages around current
+                      if (
+                        page === 1 ||
+                        page === totalPages ||
+                        (page >= currentPage - 1 && page <= currentPage + 1)
+                      ) {
+                        return (
+                          <motion.button
+                            key={page}
+                            onClick={() => handlePageChange(page)}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            className={`w-10 h-10 rounded-full font-bold transition-all ${
+                              currentPage === page
+                                ? 'bg-linear-to-r from-blue-600 to-cyan-500 text-white shadow-lg'
+                                : 'bg-base-200 text-base-content hover:bg-base-300'
+                            }`}
+                          >
+                            {page}
+                          </motion.button>
+                        );
+                      } else if (
+                        page === currentPage - 2 ||
+                        page === currentPage + 2
+                      ) {
+                        return (
+                          <span
+                            key={page}
+                            className="flex items-center px-2 text-base-content/50"
+                          >
+                            ...
+                          </span>
+                        );
+                      }
+                      return null;
+                    })}
+                  </div>
+
+                  {/* Next Button */}
+                  <motion.button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    whileHover={{
+                      scale: currentPage === totalPages ? 1 : 1.05,
+                    }}
+                    whileTap={{ scale: currentPage === totalPages ? 1 : 0.95 }}
+                    className={`px-4 py-2 rounded-full font-semibold transition-all ${
+                      currentPage === totalPages
+                        ? 'bg-base-300 text-base-content/50 cursor-not-allowed'
+                        : 'bg-linear-to-r from-blue-600 to-cyan-500 text-white hover:shadow-lg'
+                    }`}
+                  >
+                    Next
+                  </motion.button>
                 </motion.div>
-              ))}
-            </motion.div>
+              )}
+            </>
           ) : (
             <motion.div
               className="text-center py-20"
