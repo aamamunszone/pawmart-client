@@ -2,16 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
-import {
-  FaHome,
-  FaPaw,
-  FaConciergeBell,
-  FaPlus,
-  FaListAlt,
-  FaShoppingBag,
-  FaUser,
-  FaSignOutAlt,
-} from 'react-icons/fa';
+import { FaUser, FaSignOutAlt } from 'react-icons/fa';
 import Container from '../../common/Container/Container';
 import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
 import useAuth from '../../../hooks/useAuth';
@@ -37,30 +28,26 @@ const Header = () => {
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   const navItems = [
-    { path: '/home', label: 'Home', icon: <FaHome />, public: true },
-    { path: '/shop', label: 'Pets & Supplies', icon: <FaPaw />, public: true },
+    { path: '/home', label: 'Home', public: true },
+    { path: '/shop', label: 'Pets & Supplies', public: true },
     {
       path: '/services',
       label: 'Services',
-      icon: <FaConciergeBell />,
       public: true,
     },
     {
-      path: '/listings/create',
-      label: 'Add Listing',
-      icon: <FaPlus />,
-      private: true,
+      path: '/about-us',
+      label: 'About Us',
+      public: true,
     },
     {
-      path: '/listings/my-listings',
-      label: 'My Listings',
-      icon: <FaListAlt />,
-      private: true,
+      path: '/contact',
+      label: 'Contact',
+      public: true,
     },
     {
-      path: '/orders/my-orders',
-      label: 'My Orders',
-      icon: <FaShoppingBag />,
+      path: '/dashboard',
+      label: 'Dashboard',
       private: true,
     },
   ];
@@ -96,10 +83,9 @@ const Header = () => {
           {/* Desktop Nav */}
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal gap-4">
-              {filteredNavItems.map(({ path, label, icon }) => (
+              {filteredNavItems.map(({ path, label }) => (
                 <NavItem key={path} to={path}>
-                  <div className="flex items-center gap-1">
-                    {icon}
+                  <div>
                     <span>{label}</span>
                   </div>
                 </NavItem>
@@ -153,20 +139,7 @@ const Header = () => {
                     </li>
                     <div className="divider my-1"></div>
                     <li>
-                      <Link
-                        to="/listings/my-listings"
-                        className="flex items-center gap-2"
-                      >
-                        <FaListAlt /> My Listings
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/orders/my-orders"
-                        className="flex items-center gap-2"
-                      >
-                        <FaShoppingBag /> My Orders
-                      </Link>
+                      <Link to="/dashboard">Dashboard</Link>
                     </li>
                   </ul>
                 </div>
@@ -291,7 +264,7 @@ const Header = () => {
 
               <div className="p-4">
                 <ul className="menu gap-2">
-                  {filteredNavItems.map(({ path, label, icon }) => (
+                  {filteredNavItems.map(({ path, label }) => (
                     <li key={path}>
                       <Link
                         to={path}
@@ -302,7 +275,6 @@ const Header = () => {
                             : 'hover:bg-base-200'
                         }`}
                       >
-                        {icon}
                         <span>{label}</span>
                       </Link>
                     </li>

@@ -12,6 +12,9 @@ import Register from '../pages/Auth/Register/Register';
 import Login from '../pages/Auth/Login/Login';
 import CategoryFiltered from '../pages/CategoryFiltered/CategoryFiltered';
 import ListingDetails from '../pages/ListingDetails/ListingDetails';
+import AboutUs from '../pages/AboutUs/AboutUs';
+import Contact from '../pages/Contact/Contact';
+import DashboardLayout from '../layouts/DashboardLayout/DashboardLayout';
 
 export const router = createBrowserRouter([
   // MainLayout Routes
@@ -27,6 +30,8 @@ export const router = createBrowserRouter([
         Component: CategoryFiltered,
       },
       { path: 'services', Component: Services },
+      { path: 'about-us', Component: AboutUs },
+      { path: 'contact', Component: Contact },
       {
         path: 'listing-details/:id',
         element: (
@@ -35,32 +40,23 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: 'listings/create',
-        element: (
-          <PrivateRoute>
-            <AddListing />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: 'listings/my-listings',
-        element: (
-          <PrivateRoute>
-            <MyListings />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: 'orders/my-orders',
-        element: (
-          <PrivateRoute>
-            <MyOrders />
-          </PrivateRoute>
-        ),
-      },
       { path: 'auth/register', Component: Register },
       { path: 'auth/login', Component: Login },
+    ],
+  },
+
+  // DashboardLayout Routes
+  {
+    path: 'dashboard',
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      { path: 'listings/create', Component: AddListing },
+      { path: 'listings/my-listings', Component: MyListings },
+      { path: 'orders/my-orders', Component: MyOrders },
     ],
   },
 
