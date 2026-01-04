@@ -15,6 +15,7 @@ import ListingDetails from '../pages/ListingDetails/ListingDetails';
 import AboutUs from '../pages/AboutUs/AboutUs';
 import Contact from '../pages/Contact/Contact';
 import DashboardLayout from '../layouts/DashboardLayout/DashboardLayout';
+import DashboardHome from '../components/dashboard/DashboardHome/DashboardHome';
 
 export const router = createBrowserRouter([
   // MainLayout Routes
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      { index: true, Component: DashboardHome },
       { path: 'listings/create', Component: AddListing },
       { path: 'listings/my-listings', Component: MyListings },
       { path: 'orders/my-orders', Component: MyOrders },

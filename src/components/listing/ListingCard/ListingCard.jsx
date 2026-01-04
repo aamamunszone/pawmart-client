@@ -83,7 +83,7 @@ const ListingCard = ({ listing }) => {
           {listing.rating && (
             <div className="flex items-center gap-1 bg-yellow-100 dark:bg-yellow-900/30 px-3 py-1.5 rounded-full">
               <FaStar className="text-yellow-500 text-sm" />
-              <span className="text-sm font-bold text-base-content">
+              <span className="text-sm font-bold text-black">
                 {listing.rating}
               </span>
             </div>
